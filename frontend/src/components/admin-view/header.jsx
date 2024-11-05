@@ -3,12 +3,16 @@ import { Button } from "../ui/button";
 import { AlignJustify, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logOutUser } from "@/store/auth-slice";
+import { logOutUser, resetTokenAndCredentials } from "@/store/auth-slice";
 
 const AdminHeader = ({ setOpen }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleLogOut = () => {
-    dispatch(logOutUser()).then((data) => {});
+    // dispatch(logOutUser()).then((data) => {});
+    dispatch(resetTokenAndCredentials());
+    sessionStorage.clear();
+    navigate("/auth/login");
   };
   return (
     <header className="flex items-center justify-center px-4 py-3 bg-background border-b">

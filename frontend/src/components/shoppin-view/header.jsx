@@ -21,7 +21,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
-import { logOutUser } from "@/store/auth-slice";
+import { logOutUser, resetTokenAndCredentials } from "@/store/auth-slice";
 import UserCartWrapper from "./cart-wrapper";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Label } from "../ui/label";
@@ -66,7 +66,10 @@ function HeaderRightContent() {
   const { cartItem } = useSelector((state) => state?.shopCart);
 
   const handleLogOut = () => {
-    dispatch(logOutUser());
+    // dispatch(logOutUser());
+    dispatch(resetTokenAndCredentials());
+    sessionStorage.clear();
+    navigate("/auth/login");
   };
 
   useEffect(() => {
